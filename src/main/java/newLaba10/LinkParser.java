@@ -12,6 +12,7 @@ public class LinkParser {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements links = doc.select("a[href]");
+
             for (Element link : links) {
                 System.out.println(link.attr("abs:href"));
             }
