@@ -25,7 +25,7 @@ public class LinkParserHandlingError {
             System.out.println("Введите адрес заново.");
             url = LinkParserHandlingError.whitespaceCharacters(scanner);
         }
-        bol = url.startsWith("http://");
+        bol = url.startsWith("http");
         if (!bol) {
             url = "https://"+url;
         }
@@ -69,7 +69,7 @@ public class LinkParserHandlingError {
         Matcher matcher = pattern.matcher(url);
         boolean bol = matcher.matches();
         if (bol) {
-            throw new RuntimeException("Есть пробел в названии");
+            throw new RuntimeException("Есть пробел в названии веб-ресурса.");
         } else {
             return url;
         }
