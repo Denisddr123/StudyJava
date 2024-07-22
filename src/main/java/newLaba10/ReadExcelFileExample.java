@@ -2,10 +2,12 @@ package newLaba10;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
 public class ReadExcelFileExample {
+
     public static void main(String[] args) throws IOException {
         String filePath = "example/example.xlsx";
         FileInputStream inputStream = new FileInputStream(filePath);
