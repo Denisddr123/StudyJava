@@ -2,38 +2,37 @@ package timus;
 
 import java.util.Scanner;
 
-public class ShortPath {
+public class Test {
     public static void main(String[] args) {
         int size = 6, begin_index = 0, temp, minindex, min, countV, countL,
-        vFirst, vSecond, distance;
+                vFirst, vSecond, distance;
         String[] first, second;
         String[] numberVandL;
 
         Scanner scanner = new Scanner(System.in);
         first = scanner.nextLine().split(" ");
+        //Число перекрёстков
         countV = Integer.parseInt(first[0]);
+        //Число дорог
         countL = Integer.parseInt(first[1]);
-        // минимальное расстояние
+        //массив для хранения минимальных расстояний
         int[] d = new int[countV];
         // посещенные вершины
         int[] v = new int[countV];
+        //Матрица перекрёстков
         int[][] a = new int[countV][countV];
 
         for (int i = 0; i<countL; i++) {
             //a[i][i] = 0;
             second = scanner.nextLine().split(" ");
+            //Первый перекрёсток
             vFirst = Integer.parseInt(second[0])-1;
+            //Второй перекрёсток
             vSecond = Integer.parseInt(second[1])-1;
+            //Растояние между ними
             distance = Integer.parseInt(second[2]);
             a[vFirst][vSecond] = distance;
             a[vSecond][vFirst] = distance;
-
-            /*for (int j= i+1; j<size; j++) {
-                System.out.println("Введите расстояние от: " +(i+1)+" до: "+(j+1));
-                temp = scanner.nextInt();
-                a[i][j] = temp;
-                a[j][i] = temp;
-            }*/
         }
 
         for (int i=0; i<countV; i++) {
@@ -52,10 +51,11 @@ public class ShortPath {
             minindex = 10000;
             min = 10000;
             for (int i = 0; i<countV; i++) {
-                //Если вершину ещё не обошли и вес ьеньше min
+                //Если вершину ещё не обошли и вес меньше min
                 if (v[i] == 1 && (d[i]<min)) {
                     min = d[i];
                     minindex = i;
+                    break;
                 }
             }
             // Добавляем найденный минимальный вес
