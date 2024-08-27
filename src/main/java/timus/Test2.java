@@ -1,23 +1,26 @@
 package timus;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Test {
+public class Test2 {
+    static int begin_index = 0;
+    static int countV = 0;
+    //private static int[] d;
+
     public static void main(String[] args) {
-        int begin_index = 4, shortPathToZ, temp, minindex, min, countV, countL,
+        int shortPathToZ, temp, minindex, min, countL,
                 vFirst, vSecond, distance, fromItoZ;
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         String[] first, second;
-        String[] numberVandL;
         String[] test = {"1 2 7", "1 3 9", "1 6 14", "2 3 10", "2 4 15", "3 4 11", "3 6 2", "4 5 6", "5 6 9"};
         String[] test2 = {"1 7 7", "1 6 13", "1 5 1", "1 4 10", "2 7 8", "2 3 5", "2 5 3",
                 "3 7 6", "3 2 5", "3 6 10", "4 1 10", "4 5 1", "4 8 9", "5 4 1", "5 1 1",
                 "5 2 3", "5 6 1", "6 3 10", "6 1 13", "6 5 1", "6 8 4",
                 "7 1 7", "7 2 8", "7 3 6", "8 4 9", "8 5 7", "8 6 4",
         };
+        begin_index = 7;
         //8 27
 
         Scanner scanner = new Scanner(System.in);
@@ -40,7 +43,6 @@ public class Test {
         int[][] a = new int[countV][countV];
 
         for (int i = 0; i<countL; i++) {
-            //a[i][i] = 0;
             //second = scanner.nextLine().split(" ");
             second = test2[i].split(" ");
             //Первый перекрёсток
@@ -61,6 +63,8 @@ public class Test {
         //Инициализация вершин и расстояний
         for (int i = 0; i<countV; i++) {
             id[i] = 10000;
+            //id[i][1] = 10000;
+            //id[i][0] = i;
             iv[i] = 1;
         }
 
@@ -82,7 +86,7 @@ public class Test {
                             min = d[i];
                             minindex = i;
 
-                            break;
+                            //break;
                         }
                     }
                     // Добавляем найденный минимальный вес
@@ -105,58 +109,46 @@ public class Test {
 
                     }
                 } while (minindex < 10000);
+                shortPathToZ = shortPathToZ+fromItoZ;
                 a[begin_index][z] = fromItoZ;
-                shortPathToZ = shortPathToZ+a[begin_index][z];
                 System.out.println("vertex: "+(z+1) +" path: "+shortPathToZ);
                 for (int i : v) {
                     System.out.print(i+" ");
                 }
                 System.out.println();
+                getPath(a, d, shortPathToZ, z);
             }
         }
-        //Шаг алгоритма
 
         // Вывод кратчайших расстояний до вершин
         System.out.println("Кратчайшие расстояния до вершин: ");
         for (int i=0; i<countV; i++) System.out.print(d[i]+" ");
 
-       /* // Восстановление пути
-        // массив посещенных вершин
+    }
+    public static void getPath(int[][] a, int[] d, int shortPathToZ, int z) {
         int[] ver = new int[countV];
-        // индекс конечной вершины = 5 - 1
-        int end = 4;
-        // начальный элемент - конечная вершина
-        ver[0] = end+1;
-        // индекс предыдущей вершины
-        int k = 1;
-        // вес конечной вершины
-        int weight = d[end];
-
-        // пока не дошли до начальной вершины
+        StringBuilder str = new StringBuilder();
+        str.append(z + 1);
+        ver[0] = z+1;
+        int k = 1, end = z, temp, x;
+        x = a[begin_index][z];
+        int pathToZ = shortPathToZ-x;
         while (end != begin_index) {
-            // просматриваем все вершины
-            for (int i = 0; i<countV; i++) {
-                // если связь есть
+            for (int i =0; i<countV; i++) {
                 if (a[i][end] != 0) {
-                    // определяем вес пути из предыдущей вершины
-                    temp = weight - a[i][end];
-                    // если вес совпал с рассчитанным
+                    temp = pathToZ - a[i][end];
                     if (temp == d[i]) {
-                        // значит из этой вершины и был переход
-                        weight = temp;
-                        // сохраняем предыдущую вершину
+                        pathToZ = temp;
                         end = i;
-                        // и записываем ее в массив
-                        ver[k] = i + 1;
+                        ver[k] = i+1;
+                        str.append(" ").append(i + 1);
                         k++;
                     }
                 }
             }
         }
-        // Вывод пути (начальная вершина оказалась в конце массива из k элементов)
-        System.out.println("Вывод кратчайшего пути");
-        for (int i = k - 1; i >= 0; i--)
+        /*for (int i = k - 1; i >= 0; i--)
             System.out.print(ver[i] + " ");*/
-
+        System.out.println(str);
     }
 }
