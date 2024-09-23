@@ -15,7 +15,7 @@ public class Test {
         countV = Integer.parseInt(first[0]);
         //Число дорог
         countL = Integer.parseInt(first[1]);
-        //массив для хранения минимальных расстояний
+        ////массив для хранения минимальных расстояний
         int[] d = new int[countV];
         // посещенные вершины
         int[] v = new int[countV];
