@@ -1,10 +1,13 @@
-package timus;
+package timus.task_1004;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Excursion{
+public class Excursion {
     static StringBuilder str;
     static int countV = 0;
     static ArrayList<String> result;

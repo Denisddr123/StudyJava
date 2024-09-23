@@ -1,11 +1,10 @@
 package timus;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Test {
+public class TestFirst {
     public static void main(String[] args) {
         int begin_index = 4, shortPathToZ, temp, minindex, min, countV, countL,
                 vFirst, vSecond, distance, fromItoZ;
